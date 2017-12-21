@@ -22,9 +22,6 @@ import static com.laye.config.SecurityConstants.SIGN_UP_URL;
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 	
-	/*@Autowired
-    @Qualifier("userDetailsService")
-	UserDetailsService userDetailsService;*/
 	private UserDetailsService userDetailsService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     
