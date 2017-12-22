@@ -52,7 +52,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			);
 			
 		} catch (IOException e) {
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 		}
 	}
 	
@@ -64,9 +64,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		String token = Jwts.builder()
 				.setSubject(((User) auth.getPrincipal()).getUsername())
 				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME ))
-				.signWith(SignatureAlgorithm.HS512, SECRET)
+				.signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
 				.compact();
-		res.addHeader(HEADER_STRING, TOKEN_PREFIX);
+		res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+		System.out.println("token " + token);
 	}
 	
 	
